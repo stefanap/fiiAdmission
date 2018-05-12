@@ -13,13 +13,7 @@ import java.util.List;
 @Table(name = "app_user")
 public class User {
 	
-	private boolean isUsing2FA;
-	
-    private String secret;
-    
     public User() {
-        super();
-        this.secret = Base32.random();
     }
     
     @Id
@@ -144,23 +138,6 @@ public class User {
 	public void setAdmissionData(AdmissionData admissionData) {
 		this.admissionData = admissionData;
 	}
-
-	public boolean isUsing2FA() {
-		return isUsing2FA;
-	}
-
-	public void setUsing2FA(boolean isUsing2FA) {
-		this.isUsing2FA = isUsing2FA;
-	}
-
-	public String getSecret() {
-		return secret;
-	}
-
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
 	
-
 }
 

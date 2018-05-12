@@ -26,7 +26,7 @@ public class AdmissionData {
 	@Column(name = "exam_subject")
 	private String examSubject;
 
-	@Column(name = "documentType")
+	@Column(name = "document_type")
 	private String documentType;
 
 	@Column(name = "telephone")

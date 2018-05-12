@@ -20,16 +20,12 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import com.fiiadmission.provider.CustomAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-    private CustomAuthenticationDetailsSource authenticationDetailsSource;
-    
 	@Value("${security.signing-key}")
 	private String signingKey;
 
@@ -65,9 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .and()
 		        .csrf()
 		        .disable();
-		
-		http.formLogin()
-        .authenticationDetailsSource(authenticationDetailsSource);
 
 	}
 
