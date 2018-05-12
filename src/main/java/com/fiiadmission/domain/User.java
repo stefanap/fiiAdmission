@@ -3,7 +3,6 @@ package com.fiiadmission.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.jboss.aerogear.security.otp.api.Base32;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +13,11 @@ import java.util.List;
 public class User {
 	
     public User() {
+        this.secret=Base32.random();
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -25,7 +25,6 @@ public class User {
     private String username;
 
     @Column(name = "password")
-    @JsonIgnore
     private String password;
 
     @Column(name = "first_name")
@@ -46,6 +45,9 @@ public class User {
     @JsonIgnore
     @OneToOne(mappedBy = "user")
     private AdmissionData admissionData;
+
+    @Column(name = "secret")
+    private String secret;
     
 	/**
      * Roles are being eagerly loaded here because
@@ -138,6 +140,9 @@ public class User {
 	public void setAdmissionData(AdmissionData admissionData) {
 		this.admissionData = admissionData;
 	}
-	
+
+    public String getSecret() {
+        return secret;
+    }
 }
 
