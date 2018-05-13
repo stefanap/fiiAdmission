@@ -45,15 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService)
-		        .passwordEncoder(new ShaPasswordEncoder(encodingStrength));
+	protected void configure(AuthenticationManagerBuilder auth){
+		//set the custom authenticator
+		auth.authenticationProvider(authProvider());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		        .sessionManagement()
+				.sessionManagement()
 		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		        .and()
 		        .httpBasic()
@@ -84,5 +84,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		defaultTokenServices.setSupportRefreshToken(true);
 		return defaultTokenServices;
 	}
-	
+
+	/**
+	 * Initiate the custom authentication provider.
+	 * @return
+	 */
+	@Bean
+	public DaoAuthenticationProvider authProvider() {
+		final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(encoder());
+		return authProvider;
+	}
+
+	@Bean
+	public ShaPasswordEncoder encoder() {
+		return new ShaPasswordEncoder(256);
+	}
+
 }

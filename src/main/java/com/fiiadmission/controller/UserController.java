@@ -1,5 +1,6 @@
 package com.fiiadmission.controller;
 
+import org.jboss.aerogear.security.otp.Totp;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import utils.AdmissionStatus;
@@ -10,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import com.fiiadmission.domain.User;
 import com.fiiadmission.service.UserService;
 
+import javax.websocket.server.PathParam;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,19 +24,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@RequestMapping(value ="/update")
-    //@PutMapping
-    //@PreAuthorize("hasAuthority('ADMIN_USER'))")// or hasAuthority('STANDARD_USER')")
-    //public /*@ResponseBody*/ User updateUser(/*@RequestBody*/ User user){
-        //User searchedUser = null;//userService.findOne(user);
-        //return null;//userService.save(searchedUser);
-    //}
-    
+    @Autowired
+    ShaPasswordEncoder passwordEncoder;
+
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
     public @ResponseBody User response(@RequestBody User user) {
         //encode the password
-        ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
         user.setPassword(passwordEncoder.encodePassword(user.getPassword(), ""));
         return userService.save(user);
     }
@@ -67,5 +64,17 @@ public class UserController {
     public List<User> getUsers(){
         return userService.findAllUsers();
     }
-    
+
+    @GetMapping(value = "/{id}/qr-code")
+    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public String getUsers(@PathVariable("id") Long id){
+        User user = this.userService.findById(id);
+        String url = "";
+        try {
+            url = userService.generateQRUrl(user);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 }

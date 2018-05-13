@@ -9,13 +9,19 @@ import com.fiiadmission.domain.User;
 import com.fiiadmission.repository.UserRepository;
 import com.fiiadmission.service.UserService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+
+	public static String QR_PREFIX = "https://chart.googleapis.com/chart?chs=200x200&chld=M%%7C0&cht=qr&chl=";
+	public static String APP_NAME = "FII_ADMISSION";
+
+	@Autowired
     private UserRepository userRepository;
 
     @Override
@@ -61,4 +67,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(id);
 	}
 
+	@Override
+	public String generateQRUrl(User user) throws UnsupportedEncodingException {
+		return QR_PREFIX + URLEncoder.encode(String.format("otpauth://totp/%s:%s?secret=%s&issuer=%s", APP_NAME, user.getEmail(), user.getSecret(), APP_NAME), "UTF-8");
+	}
 }

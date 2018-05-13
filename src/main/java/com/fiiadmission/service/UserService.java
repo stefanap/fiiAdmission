@@ -1,5 +1,6 @@
 package com.fiiadmission.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,6 @@ public interface UserService {
 	User save(User searchedUser);
 
 	User findById(Long id);
+
+    String generateQRUrl(User user) throws UnsupportedEncodingException;
 }
