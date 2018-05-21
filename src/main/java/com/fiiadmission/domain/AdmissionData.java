@@ -13,36 +13,62 @@ import java.util.List;
 @Table(name = "admission_data")
 public class AdmissionData {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private Long id;
 
 	@Column(name = "cnp")
 	private String cnp;
 
-	@Column(name = "adress")
+	@Column(name = "address")
 	private String adress;
 
 	@Column(name = "exam_subject")
 	private String examSubject;
 
-	@Column(name = "document_type")
-	private String documentType;
-
 	@Column(name = "telephone")
 	private String telephone;
 
 	@Column(name = "bac_grade")
-	private Long bacGrade;
+	private Float bacGrade;
 
 	@Column(name = "general_grade")
-	private Long generalGrade;
+	private Float generalGrade;
 
-	@Column(name = "graduated_from")
-	private String graduatedFrom;
-
+	@OneToOne
+	@JoinColumn(name = "highschool_id")
+	private Highschool highschool;
+	
 	@Column(name = "civil_state")
 	private String civil_state;
+	
+	@Column(name = "language")
+	private String language;
+	
+	@Column(name = "hasDisabilities")
+	private Boolean hasDisabilities;
+	
+	@Column(name = "additionalInformation")
+	private String additionalInformation;
+	
+	@Column(name="admissionType")
+	private String admissionType;
+	
+	@OneToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
+	
+	@OneToOne
+	@JoinColumn(name = "regiony_id")
+	private Region region;
+	
+	@OneToOne
+	@JoinColumn(name = "city_id")
+	private City city;
+	
+	@OneToOne
+	@JoinColumn(name = "document_type_id")
+	private DocumentType documentType;
 
 	@OneToOne
 	@JoinColumn(name = "user_id")
@@ -80,12 +106,12 @@ public class AdmissionData {
 		this.examSubject = examSubject;
 	}
 
-	public String getDocument_type() {
+	public DocumentType getDocument_type() {
 		return documentType;
 	}
 
-	public void setDocuemnt_type(String docuemnt_type) {
-		this.documentType = docuemnt_type;
+	public void setDocuemnt_type(DocumentType document_type) {
+		this.documentType = document_type;
 	}
 
 	public String getTelephone() {
@@ -96,28 +122,96 @@ public class AdmissionData {
 		this.telephone = telephone;
 	}
 
-	public Long getBacGrade() {
+	
+	public Float getBacGrade() {
 		return bacGrade;
 	}
 
-	public void setBacGrade(Long bacGrade) {
+	public void setBacGrade(Float bacGrade) {
 		this.bacGrade = bacGrade;
 	}
 
-	public Long getGeneralGrade() {
+	public Float getGeneralGrade() {
 		return generalGrade;
 	}
 
-	public void setGeneralGrade(Long generalGrade) {
+	public void setGeneralGrade(Float generalGrade) {
 		this.generalGrade = generalGrade;
 	}
 
-	public String getGraduatedFrom() {
-		return graduatedFrom;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setGraduatedFrom(String graduatedFrom) {
-		this.graduatedFrom = graduatedFrom;
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Boolean getHasDisabilities() {
+		return hasDisabilities;
+	}
+
+	public void setHasDisabilities(Boolean hasDisabilities) {
+		this.hasDisabilities = hasDisabilities;
+	}
+
+	public String getAdditionalInformation() {
+		return additionalInformation;
+	}
+
+	public void setAdditionalInformation(String additionalInformation) {
+		this.additionalInformation = additionalInformation;
+	}
+
+	public String getAdmissionType() {
+		return admissionType;
+	}
+
+	public void setAdmissionType(String admissionType) {
+		this.admissionType = admissionType;
+	}
+
+
+
+
+	public DocumentType getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
+
+	public Highschool getHighschool() {
+		return highschool;
+	}
+
+	public void setHighschool(Highschool highschool) {
+		this.highschool = highschool;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public String getCivil_state() {

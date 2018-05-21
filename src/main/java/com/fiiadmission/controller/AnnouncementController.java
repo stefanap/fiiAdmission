@@ -15,15 +15,14 @@ import com.fiiadmission.service.AnnouncementService;
 import com.fiiadmission.service.UserService;
 
 @RestController
-@RequestMapping("/fii")
+@RequestMapping("/announcements")
 @CrossOrigin(origins = "http://localhost:3000")
 public class AnnouncementController {
 
 	@Autowired
     private AnnouncementService announcementService;
 	
-	 @RequestMapping(value ="/announcements", method = RequestMethod.GET)
-	 @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+	 @RequestMapping(method = RequestMethod.GET)
 	    public List<Announcement> getAnnouncements(){
 	        return announcementService.findAllAnnouncements();
 	    }

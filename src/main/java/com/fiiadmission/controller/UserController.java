@@ -65,10 +65,10 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @GetMapping(value = "/{id}/qr-code")
-    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
-    public String getUsers(@PathVariable("id") Long id){
-        User user = this.userService.findById(id);
+    @GetMapping(value = "/{username}/qr-code")
+    //@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public String getUsers(@PathVariable("username") String username){
+        User user = this.userService.findByUsername(username);
         String url = "";
         try {
             url = userService.generateQRUrl(user);

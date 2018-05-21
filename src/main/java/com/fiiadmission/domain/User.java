@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jboss.aerogear.security.otp.api.Base32;
 
 import javax.persistence.*;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -17,11 +19,11 @@ public class User {
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "user_name")
     private String username;
 
     @Column(name = "password")
@@ -36,18 +38,22 @@ public class User {
     @Column(name = "email")
     private String email;
     
-    @Column(name = "category")
-    private String category;
-    
     @Column(name = "admission_status")
     private String admissionStatus;
-
+    
     @JsonIgnore
     @OneToOne(mappedBy = "user")
     private AdmissionData admissionData;
 
     @Column(name = "secret")
     private String secret;
+    
+    @Column(name ="register_date")
+    private Timestamp registerDate;
+    
+    @Column(name="register_number")
+    private Long registerNumber;
+    
     
 	/**
      * Roles are being eagerly loaded here because
@@ -117,12 +123,24 @@ public class User {
 		this.email = email;
 	}
 
-	public String getCategory() {
-		return category;
+	public Timestamp getRegisterDate() {
+		return registerDate;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setRegisterDate(Timestamp registerDate) {
+		this.registerDate = registerDate;
+	}
+
+	public Long getRegisterNumber() {
+		return registerNumber;
+	}
+
+	public void setRegisterNumber(Long registerNumber) {
+		this.registerNumber = registerNumber;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
 	}
 
 	public String getAdmissionStatus() {
@@ -144,5 +162,7 @@ public class User {
     public String getSecret() {
         return secret;
     }
+    
+    
 }
 
