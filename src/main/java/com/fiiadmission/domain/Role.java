@@ -11,7 +11,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name="role_name")
+    @Column(name="role_name",length=30)
     private String roleName;
 
     @Column(name="description")

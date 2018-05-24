@@ -18,7 +18,7 @@ public class DocumentType {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "document_type")
+	@Column(name = "document_type",length=30)
 	private String documentType;
 
 	public Long getId() {

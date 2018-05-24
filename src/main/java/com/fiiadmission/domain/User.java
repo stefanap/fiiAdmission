@@ -23,22 +23,22 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name",length=30)
     private String username;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name",length=50)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name",length=30)
     private String lastName;
     
-    @Column(name = "email")
+    @Column(name = "email",length=50)
     private String email;
     
-    @Column(name = "admission_status")
+    @Column(name = "admission_status",length=30)
     private String admissionStatus;
     
     @JsonIgnore

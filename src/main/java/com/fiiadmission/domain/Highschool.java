@@ -18,7 +18,7 @@ public class Highschool {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name",length=30)
 	private String highSchoolName;
 
 	public Long getId() {

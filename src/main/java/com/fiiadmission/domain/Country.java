@@ -18,7 +18,7 @@ public class Country {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "country")
+	@Column(name = "country",length=30)
 	private String country;
 
 	public Long getId() {

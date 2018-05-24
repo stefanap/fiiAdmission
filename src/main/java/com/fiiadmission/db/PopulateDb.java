@@ -49,6 +49,8 @@ public class PopulateDb implements ApplicationRunner {
 
         if(announcementRepository.count() == 0){
             this.createAnnouncement("Examenul se sustine pe 21 iulie la ora 11");
+            this.createAnnouncement("Rezultatele vor fi postate pe site o saptamana mai tarziu");
+            this.createAnnouncement("Locurile trebuiesc confirmate");
         }
     }
 

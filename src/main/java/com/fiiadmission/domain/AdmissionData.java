@@ -17,41 +17,41 @@ public class AdmissionData {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "cnp")
+	@Column(name = "cnp", length=13)
 	private String cnp;
 
-	@Column(name = "address")
+	@Column(name = "address", length=200)
 	private String adress;
 
-	@Column(name = "exam_subject")
+	@Column(name = "exam_subject", length=30)
 	private String examSubject;
 
-	@Column(name = "telephone")
+	@Column(name = "telephone", length=13)
 	private String telephone;
 
-	@Column(name = "bac_grade")
+	@Column(name = "bac_grade", length=10)
 	private Float bacGrade;
 
-	@Column(name = "general_grade")
+	@Column(name = "general_grade", length=10)
 	private Float generalGrade;
 
 	@OneToOne
 	@JoinColumn(name = "highschool_id")
 	private Highschool highschool;
 	
-	@Column(name = "civil_state")
+	@Column(name = "civil_state",length=30)
 	private String civil_state;
 	
-	@Column(name = "language")
+	@Column(name = "language",length=20)
 	private String language;
 	
-	@Column(name = "hasDisabilities")
+	@Column(name = "hasDisabilities",length=2)
 	private Boolean hasDisabilities;
 	
 	@Column(name = "additionalInformation")
 	private String additionalInformation;
 	
-	@Column(name="admissionType")
+	@Column(name="admissionType",length=50)
 	private String admissionType;
 	
 	@OneToOne
